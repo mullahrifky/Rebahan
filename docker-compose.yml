@@ -1,0 +1,31 @@
+version: "3.8"
+
+# ============================================================
+# REBAHAN - Sistem Kinerja Tim BPS
+# Docker Compose untuk deployment via Coolify
+# ============================================================
+
+services:
+  rebahan:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rebahan
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3000}:80"
+    environment:
+      - TZ=Asia/Jakarta
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+
+# Catatan untuk Coolify:
+# - Coolify otomatis menangani SSL/HTTPS via Traefik reverse proxy
+# - Set domain di Coolify dashboard, tidak perlu konfigurasi tambahan di sini
+# - Port 3000 adalah port host default; Coolify bisa override via environment APP_PORT

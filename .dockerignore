@@ -1,0 +1,30 @@
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Documentation source (PDF sudah di-copy, .md tidak diperlukan di container)
+*.md
+
+# Docker files sendiri (tidak perlu masuk ke image)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Dev/scratch files
+*.log
+*.tmp
+*.bak
+fix_video_player.js
+scratch/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode
+.idea
+*.swp
+*.swo
